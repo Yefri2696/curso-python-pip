@@ -1,15 +1,29 @@
 import utils# puedes crear tus propio mudulos y importarlos
 import read_csv
 import charts
+import pandas as pd
 
 def rund():
+ 
   data = read_csv.read_csv('population.csv')
+  '''
   data = list(filter(lambda item: item['Continent'] == 'South America', data))
   name = 'South America'
 
   countries = list(map(lambda x: x ['Country/Territory'], data))
   percentage = list(map(lambda x: x['World Population Percentage'], data))
   charts.generate_pie_chart(name, countries, percentage)
+  '''
+
+  df = pd.read_csv('population.csv')#df = dataframe
+  df = df[df['Continent'] == 'Africa']#se realiza un filtro con panda
+
+  name = 'Africa'
+
+  countries = df['Country/Territory'].values
+  percentages = df['World Population Percentage'].values
+
+  charts.generate_pie_chart(name, countries, percentages)
 
   country = input ('Type Country => ')
   print(country)
