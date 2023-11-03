@@ -1,4 +1,20 @@
 import store
+from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
+
+
+app = FastAPI()
+
+@app.get('/')#se le conoce como un decorador y se le da la ruta para acceder desde la web
+def get_list():
+    return[1,2,3,4, 5]
+
+@app.get('/page', response_class=HTMLResponse)
+def get_list():
+    return"""
+        <h1>Hola soy una pagina</h1>
+        <p>soy un parragrafo</p>
+    """
 
 def run():
     store.get_categories()
